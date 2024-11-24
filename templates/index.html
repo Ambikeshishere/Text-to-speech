@@ -3,47 +3,146 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video Editor</title>
-    <link rel="stylesheet" href="/static/styles.css">
+    <title>Text to Speech Converter</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #ffeb3b;
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            padding-top: 30px;
+        }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 600px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #f44336;
+            font-family: 'Press Start 2P', cursive;
+            margin-bottom: 20px;
+        }
+
+        textarea {
+            border: 2px solid #ff4081;
+            border-radius: 15px;
+            padding: 15px;
+            font-size: 1.1rem;
+            width: 100%;
+            min-height: 150px;
+            background-color: #ffebee;
+            color: #f44336;
+            transition: all 0.3s ease;
+        }
+
+        textarea:focus {
+            border-color: #ff1c8c;
+            box-shadow: 0 0 5px rgba(255, 28, 140, 0.5);
+        }
+
+        .btn {
+            background-color: #ff4081;
+            border-radius: 30px;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #ff1c8c;
+            transform: scale(1.05);
+        }
+
+        .btn:active {
+            transform: scale(1);
+        }
+
+        .output-container {
+            margin-top: 30px;
+        }
+
+        .fun-bubble {
+            background-color: #ff4081;
+            color: white;
+            padding: 20px;
+            border-radius: 25px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            width: fit-content;
+            margin: 20px auto;
+            animation: bounce 1s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        .audio-player {
+            margin-top: 20px;
+            width: 100%;
+            background-color: #ffebee;
+            border-radius: 15px;
+            padding: 10px;
+        }
+
+        .download-btn {
+            margin-top: 20px;
+            background-color: #8bc34a;
+            padding: 10px 25px;
+            border-radius: 25px;
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .download-btn:hover {
+            background-color: #7bbf42;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <h1>Video Editor</h1>
+        <h1>🎤 Text-to-Speech Fun! 🎤</h1>
 
-        <div id="upload-section">
-            <h2>Upload Video</h2>
-            <input type="file" id="video-upload" accept="video/*">
-            <button onclick="uploadVideo()">Upload</button>
+        <!-- Text Input Section -->
+        <div>
+            <h3>Type something fun below!</h3>
+            <form method="POST" action="/convert">
+                <textarea name="text" required placeholder="Type your fun text here..."></textarea>
+                <br>
+                <button type="submit" class="btn mt-3">Convert it! 🚀</button>
+            </form>
         </div>
 
-        <div id="edit-section">
-            <h2>Edit Video</h2>
-            <label for="action">Action:</label>
-            <select id="action">
-                <option value="text">Add Text</option>
-                <option value="grayscale">Apply Grayscale Filter</option>
-            </select>
-
-            <div id="text-options">
-                <label for="overlay-text">Overlay Text:</label>
-                <input type="text" id="overlay-text" placeholder="Enter text">
+        <!-- Output Section -->
+        {% if audio_file %}
+        <div class="output-container">
+            <div class="fun-bubble">
+                🗣️ "I just spoke your text!" 🎶
             </div>
-
-            <label for="start-trim">Start (0.0 to 1.0):</label>
-            <input type="number" id="start-trim" min="0" max="1" step="0.1" value="0">
-
-            <label for="end-trim">End (0.0 to 1.0):</label>
-            <input type="number" id="end-trim" min="0" max="1" step="0.1" value="1">
-
-            <button onclick="editVideo()">Edit</button>
+            <!-- Audio Player with Autoplay -->
+            <audio class="audio-player" controls autoplay>
+                <source src="/static/audio/{{ audio_file }}" type="audio/mp3">
+                Your browser does not support the audio element.
+            </audio>
+            <br>
+            <a href="/download/{{ audio_file }}" class="download-btn">🎧 Download the Speech 🎧</a>
         </div>
-
-        <div id="download-section">
-            <h2>Download Processed Video</h2>
-            <button onclick="downloadVideo()">Download</button>
-        </div>
+        {% endif %}
     </div>
-
-    <script src="/static/scripts.js"></script>
 </body>
 </html>
