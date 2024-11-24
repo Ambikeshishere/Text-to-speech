@@ -115,16 +115,17 @@
     </style>
 </head>
 <body>
+    <marquee>This page is designed by Ambikesh Srivastava🗣️</marquee>
     <div class="container">
-        <h1>🎤 Text-to-Speech Fun! 🎤</h1>
+        <h1>🎤 Text to speech converter 🎤</h1>
 
         
         <div>
-            <h3>Type something fun below!</h3>
+            <h5>What you want to convert in Speech-</h5>
             <form method="POST" action="/convert">
                 <textarea name="text" required placeholder="Type your fun text here..."></textarea>
                 <br>
-                <button type="submit" class="btn mt-3">Convert it! 🚀</button>
+                <button type="submit" class="btn mt-3">Convert it! 🎶</button>
             </form>
         </div>
 
@@ -132,7 +133,7 @@
         {% if audio_file %}
         <div class="output-container">
             <div class="fun-bubble">
-                🗣️ "I just spoke your text!" 🎶
+                "This website is designed by Ambikesh Srivastava" 
             </div>
             
             <audio class="audio-player" controls autoplay>
