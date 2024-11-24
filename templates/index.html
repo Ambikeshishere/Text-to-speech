@@ -118,7 +118,7 @@
     <div class="container">
         <h1>🎤 Text-to-Speech Fun! 🎤</h1>
 
-        <!-- Text Input Section -->
+        
         <div>
             <h3>Type something fun below!</h3>
             <form method="POST" action="/convert">
@@ -128,13 +128,13 @@
             </form>
         </div>
 
-        <!-- Output Section -->
+        
         {% if audio_file %}
         <div class="output-container">
             <div class="fun-bubble">
                 🗣️ "I just spoke your text!" 🎶
             </div>
-            <!-- Audio Player with Autoplay -->
+            
             <audio class="audio-player" controls autoplay>
                 <source src="/static/audio/{{ audio_file }}" type="audio/mp3">
                 Your browser does not support the audio element.
