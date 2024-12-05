@@ -26,6 +26,9 @@ The application ensures that only one audio file is present at a time by removin
 libraries used
 
 pip install flask
+
 pip install opencv-python-headless
+
 pip install gtts
+
 pip install uuid
