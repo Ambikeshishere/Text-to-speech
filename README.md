@@ -32,3 +32,5 @@ pip install opencv-python-headless
 pip install gtts
 
 pip install uuid
+
+After this it will work 
